@@ -1,3 +1,7 @@
+import controlP5.*;
+
+DetailsPane dp;
+
 
 Draggable d1;
 Draggable d2;
@@ -6,15 +10,20 @@ Draggable d4;
 Draggable d5;
 Draggable d6;
 
-void setup(){
+void settings(){
    size(640,480,P3D);
+}
+
+void setup(){
    
-   d1 = new Draggable(0,0);
-   d2 = new Draggable(0,120);
-   d3 = new Draggable(0,240);
-   d4 = new Draggable(300,0);
-   d5 = new Draggable(300,120);
-   d6 = new Draggable(300,240);
+   dp = new DetailsPane();
+   
+   d1 = new Draggable(10,0);
+   d2 = new Draggable(10,130);
+   d3 = new Draggable(10,260);
+   d4 = new Draggable(320,0);
+   d5 = new Draggable(320,130);
+   d6 = new Draggable(320,260);
    
    d2.setRenderable(new Histogram());
    d3.setRenderable(new TreeMap());
@@ -25,7 +34,7 @@ void setup(){
 
 
 void draw(){
-  background(0);
+  background(0,0,0);
   
   d1.render();
   d2.render();

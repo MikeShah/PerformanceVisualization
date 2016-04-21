@@ -21,7 +21,11 @@ class ChordDiagram extends Renderable{
          float t = i*angle;
          float xPos = centerX+(w/2)*cos((t));
          float yPos = centerY+(h/2)*sin((t));
-         ellipse(xPos,yPos,5,5);
+         cells.get(i).setRGB(255,0,0);
+         cells.get(i).setXYZ(xPos,yPos,0);
+         cells.get(i).setWHD(5,5,0);
+         cells.get(i).render();
+         //ellipse(xPos,yPos,5,5);
       }
   }
   

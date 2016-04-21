@@ -15,7 +15,7 @@ class Cell{
     float w; // x-axis
     float h; // y-axis
     float d; // z-axis
-    
+        
     // Color
     float r,g,b;
     // Actual data
@@ -23,8 +23,11 @@ class Cell{
     // Time Cell is on the curve
     float time;
     
-    // Selected
+    // Selected (if we have clicked)
     boolean selected = false;
+    // Highlighted (if we merely mouse'ing over and have not clicked )
+    boolean highlighted = false;
+    
     // Call tree node
     int myCallTreeIndex = -1;  // The index of the cell in the linearized call tree.
     
@@ -63,15 +66,32 @@ class Cell{
     public void addChildCell(Cell child){
       metaData.addChild(child);      
     }
+
+    // Draw a code city
+    public void render3D(){
+      onHover();
+      
+      pushMatrix();
+         translate(x,y,z);
+         rotateX(45);
+         box(w, h, d);
+       popMatrix();
+    }
     
     // Draw a code city
     public void render(){
-       //rect(x,y,w,h);
-       pushMatrix();
-       fill(r,g,b);
-       translate(x, y-h/2, z); 
-       box(w, h, d);
-       popMatrix();
+      onHover(); 
+      rect(x, y, w,h);
     }
-  
+    
+    private void onHover(){
+      if(mouseX > x && mouseX < x+w && mouseY > y && mouseY < y+h){
+        fill(g,r,b);
+        highlighted = true;
+        dp.dataString.setText(metaData.name);
+      }else{
+        fill(r,g,b);
+      }
+    }
+    
 }

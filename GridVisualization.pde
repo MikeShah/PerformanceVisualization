@@ -12,9 +12,11 @@ class GridVisualization extends Renderable{
       float xOffset = offsetX;
       // Render a grid
       for(int i =0; i < cells.size(); i++){
-
-        fill(255,0,0); stroke(255);
-        rect(xOffset, yOffset,cellWidth,cellHeight);
+        cells.get(i).setRGB(255,0,0);
+        cells.get(i).setXYZ(xOffset,yOffset,0);
+        cells.get(i).setWHD(cellWidth,cellHeight,0);
+        cells.get(i).render();
+         
         xOffset += cellWidth;
 
         if(xOffset > w+offsetX-cellWidth){

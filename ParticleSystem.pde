@@ -37,15 +37,17 @@ class ParticleSystem extends Renderable{
   public void render(){
     updateOffsets();
       // Render a particle system
+      float particleSize = 5;
+      
       for(int i =0; i < particles.size(); i++){
           fill(particles.get(i).rgb.x,particles.get(i).rgb.y,particles.get(i).rgb.z);
           particles.get(i).run();
           // If the rectangle is out of bounds, then do not render it
-          if(particles.get(i).position.x > offsetX+w || particles.get(i).position.x < offsetX || particles.get(i).position.y < offsetY || particles.get(i).position.y > offsetY+h){
+          if(particles.get(i).position.x+particleSize > offsetX+w || particles.get(i).position.x < offsetX+particleSize || particles.get(i).position.y < offsetY+particleSize || particles.get(i).position.y+particleSize > offsetY+h){
             
           }else{
             // Otherwise, render the particle
-            rect(particles.get(i).position.x,particles.get(i).position.y,5,5);
+            rect(particles.get(i).position.x,particles.get(i).position.y,particleSize,particleSize);
           }
       }
   }

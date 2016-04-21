@@ -10,7 +10,7 @@ class CodeCity extends Renderable{
   public void render(){
       float XStart = offsetX;
       float YStart = offsetY+h;
-      float ZStart = 0;
+      float ZStart = 5;
 
       float xPosition = XStart;
       float yPosition = 0;
@@ -21,16 +21,17 @@ class CodeCity extends Renderable{
       
       // Render a grid
       for(int i =0; i < cells.size(); i++){
-          pushMatrix();
-              translate(xPosition,YStart+yPosition,ZStart);
-              xPosition += xSize;
-              if(xPosition > w+XStart)
-              {
-                xPosition = XStart;
-                yPosition -= ySize;
-              }
-              box(xSize,ySize,zSize);
-          popMatrix();
+            cells.get(i).setRGB(255,0,0);
+            cells.get(i).setXYZ(xPosition,YStart+yPosition,ZStart);
+            cells.get(i).setWHD(xSize,ySize,zSize);              
+            xPosition += xSize;
+            if(xPosition > w+XStart)
+            {
+              xPosition = XStart;
+              yPosition -= ySize;
+            }
+
+             cells.get(i).render3D();
       }
   }
   

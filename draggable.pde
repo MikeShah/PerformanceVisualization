@@ -26,18 +26,25 @@ class Draggable{
   float relative_offsetY = y+h;
   
   void init(){
+    // Initialize the data layer.
+    myDataLayer = new DataLayer();
+    
     // Set the renderable right away. Note it is important to do this first and then update things later.
     // TODO make this something else so we can have multiple visualizations...maybe a list?
     setRenderable(new GridVisualization());
     // Draggable titlebar part
     state = 0;
-    r=g=b=192;
+    r=179;
+    g=171;
+    b=154;
     rd=gd=bd=255;
     x=y=0;
     w=300;
     h=20;
     // Canvas properties
-    canvas_r=canvas_g=canvas_b=128;
+    canvas_r=255;
+    canvas_g=244;
+    canvas_b=219;
     canvasHeight = 100;
     
     drawTo = null;
@@ -76,22 +83,38 @@ class Draggable{
         fill(r,g,b,192);
       }else{
         fill(rd,gd,bd,192);
-      }
+      } 
      
-     stroke(r,g,b);
-      
+     stroke(r,g,b); 
      rect(x,y,w,h);
+     /* Gradient
+     beginShape();
+     fill(r,g,b);
+     vertex(x,y);
+     vertex(x,y+h);
+     fill(g,r,b);
+     vertex(x+w,y+h);
+     vertex(x+w,y);
+     endShape();
+     */
+     
+     ellipse(x+7.5,y+9,10,10);
+     
      // Canvas
      fill(canvas_r,canvas_g,canvas_b,128);
      rect(x,y+h,w,canvasHeight);
      
+     
+     // (1) Figure out our offsets
      myRenderable.getOffsets(relative_offsetX, relative_offsetY);
+     // (3) Render final results
      myRenderable.render();
      
      // Titlebar text
       fill(0);stroke(0);
-      text("Some state:"+state,x+1,y+10);
+      text("Some state:"+state,x+20,y+10);
   }
+
   
   // Check to make sure the 
   private void checkBounds(){

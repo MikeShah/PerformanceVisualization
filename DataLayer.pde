@@ -11,12 +11,23 @@ class DataLayer{
  
    // This needs to be thread-safe, because we clear the cells and also render them at the same time.
    CopyOnWriteArrayList<Cell> cells;  
+    
+   CallTree myCallTree;                    // Actual tree representation 
+   ArrayList<CallTreeNode> LinearCallTree; // A flattened tree that can be mapped to the Hilbert Curve (essentially bfs tree, then sorted by time)
+    
      
    public DataLayer(){
       cells = new CopyOnWriteArrayList<Cell>();
       
-      for(int i=0; i < 100; i++){
-        cells.add(new Cell("test"));
+      // Load the Call Tree and add cells based on that data
+      myCallTree = new CallTree();
+      myCallTree.load("/Users/michaelshah/Desktop/Snapshots/JVisualVM.csv");
+      // Linearize the tree
+      LinearCallTree = myCallTree.getLinearTree();
+      
+      // For each node in the tree, we create a cell, that is the renderable component in the visualization.
+      for(int i=0; i < LinearCallTree.size(); i++){
+        cells.add(new Cell(LinearCallTree.get(i).m_methodName));
       }
    }
   
