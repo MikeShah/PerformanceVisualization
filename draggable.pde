@@ -113,6 +113,14 @@ class Draggable{
      // Titlebar text
       fill(0);stroke(0);
       text("Some state:"+state,x+20,y+10);
+      
+      // Draw a line between linked components
+      if(drawTo != null){
+         fill(255); stroke(255);
+         rect(x,y,5,5);
+         line(x,y,drawTo.x,drawTo.y);
+         ellipse(drawTo.x,drawTo.y,5,5);
+      }
   }
 
   
@@ -126,6 +134,10 @@ class Draggable{
     }else{
       state = 0;
     }
+  }
+  
+  private void setDrawTo(Draggable d){
+   drawTo = d;
   }
   
   // Drag the object from the titlebar

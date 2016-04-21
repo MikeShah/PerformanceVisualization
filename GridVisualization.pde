@@ -10,8 +10,10 @@ class GridVisualization extends Renderable{
       float cellHeight = 5;
       float yOffset = offsetY;
       float xOffset = offsetX;
+      
       // Render a grid
       for(int i =0; i < cells.size(); i++){
+        // Set cell properties
         cells.get(i).setRGB(255,0,0);
         cells.get(i).setXYZ(xOffset,yOffset,0);
         cells.get(i).setWHD(cellWidth,cellHeight,0);

@@ -30,6 +30,8 @@ void setup(){
    d4.setRenderable(new ParticleSystem());
    d5.setRenderable(new CodeCity());
    d6.setRenderable(new ChordDiagram());
+   
+   d1.setDrawTo(d2);
 }
 
 
