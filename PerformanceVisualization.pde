@@ -32,6 +32,11 @@ void setup(){
    d6.setRenderable(new ChordDiagram());
    
    d1.setDrawTo(d2);
+   d2.setDrawTo(d3);
+   d3.setDrawTo(d4);
+   d4.setDrawTo(d5);
+   d5.setDrawTo(d6);
+
 }
 
 

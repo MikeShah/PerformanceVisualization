@@ -9,7 +9,7 @@ class Draggable{
   float x,y,w,h;   // Position and dimensions
   float canvasHeight;  // Height of the renderable area
   float canvas_r,canvas_g,canvas_b; // color of the renderable area
-  int state;  // 0 means stable, 1 means being hovered, 2 means being dragged
+  int state;  // 0 means stable, 1 means being hovered, 2 means being dragged, 3 means being re-sized
   
   Draggable drawTo;  // Which draggable to draw to? This tells us, which visualization to draw edges to.
                      // We will subsequently need to get a reference to that visualizations DataLayer.
@@ -18,6 +18,9 @@ class Draggable{
   public Renderable myRenderable;
   // The data associated with the Draggable widget
   public DataLayer myDataLayer;
+  
+  // Size of the target for resizing the visualization
+  float resizeSquare = 10;
   
   
    // Figures out the top left corner of the canvas
@@ -70,6 +73,19 @@ class Draggable{
       resized();
   }
   
+  private void resizeWidget(){
+      // Only resize if we're in bounds
+    if(mouseX > x+w-resizeSquare && mouseX < x+w && mouseY < y+canvasHeight+h+resizeSquare && mouseY > y+canvasHeight+resizeSquare){
+      println("resizing");
+      fill(255,0,0);
+      if(mousePressed==true){
+        w+= mouseX - pmouseX;
+        canvasHeight+= mouseY - pmouseY;
+        resized();
+      }
+    }
+  }
+  
   // Render the widget
   public void render(){    
     // Perform the drag functionality 
@@ -103,6 +119,12 @@ class Draggable{
      // Canvas
      fill(canvas_r,canvas_g,canvas_b,128);
      rect(x,y+h,w,canvasHeight);
+     
+     // Resize square
+     fill(r,g,b);
+    // Perform resizing
+    resizeWidget();
+     rect(x+w-resizeSquare,y+canvasHeight+resizeSquare,resizeSquare,resizeSquare);
      
      
      // (1) Figure out our offsets
@@ -148,16 +170,17 @@ class Draggable{
         state = 0;
       }
       
+      
       // Only drag our object if we're within bounds
-      if( mouseX < width && mouseX > 0){
+      if( mouseX < x+w && mouseX > x){
         x+= mouseX - pmouseX;
       }
-      if( mouseY < height && mouseY > 0){
+      if( mouseY < y+h && mouseY > y){
         y+= mouseY - pmouseY;
       }
-      
     }
     
   }
+  
   
 }
